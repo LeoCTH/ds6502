@@ -5,8 +5,7 @@
 #include "memory.h"
 #include "error_checking.h"
 
-typedef struct s_ds6502_cpu ds6502_cpu;
-struct s_ds6502_cpu {
+typedef struct {
     u8 a, x, y, sp;
     u16 pc;
     union {
@@ -24,7 +23,7 @@ struct s_ds6502_cpu {
     };
     ds6502_memory* memory;
     ds_status_code status_code;
-};
+} ds6502_cpu;
 
 // new needs a status code because the cpu alloc might fail.
 // this is assuming that cpu != NULL
