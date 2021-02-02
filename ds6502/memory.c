@@ -1,5 +1,6 @@
 #include "memory.h"
 
+#include <stddef.h>
 #include "memory/internal.h"
 
 void ds6502_mem_free(ds6502_memory** mem) {
