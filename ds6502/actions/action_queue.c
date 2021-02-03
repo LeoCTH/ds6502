@@ -5,9 +5,10 @@ ds_action_queue ds_actq_create() {
     return (ds_action_queue){.first = NULL, .last = NULL};
 }
 
-void ds_actq_enqueue(ds_action_queue* queue, ds_action action) {
+void ds_actq_enqueue(ds_action_queue* queue, ds_action action, void* operand) {
     ds_action_node* node = new(ds_action_node);
     node->action = action;
+    node->operand = operand;
     if (queue->last) {
         // append
         queue->last->next = node;
@@ -17,21 +18,21 @@ void ds_actq_enqueue(ds_action_queue* queue, ds_action action) {
     }
     else {
         queue->first = queue->last = node;
+        node->prev = node->next = NULL;
     }
 }
 
-ds_action ds_actq_dequeue(ds_action_queue* queue) {
+void ds_actq_dequeue(ds_action_queue* queue, ds_action* action, void** operand) {
     if (queue->first) {
         ds_action_node* node = queue->first;
         if (!node->next) {
             queue->first = queue->last = NULL;
         }
         else queue->first = node->next;
-        ds_action action = node->action;
+        *action = node->action;
+        *operand = node->operand;
         free_then_null(node);
-        return action;
     }
-    return NULL;
 }
 
 void ds_actq_empty(ds_action_queue* queue) {

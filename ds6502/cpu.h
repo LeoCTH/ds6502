@@ -6,6 +6,7 @@
 #include "memory.h"
 #include "error_checking.h"
 #include "actions/action_queue.h"
+#include "bus.h"
 
 struct s_ds6502_cpu {
     u8 a, x, y, sp;
@@ -23,7 +24,7 @@ struct s_ds6502_cpu {
             bool ps_negative: 1;
         };
     };
-    ds6502_memory* memory;
+    ds6502_bus bus;
     ds_status_code status_code;
     ds_action_queue action_queue;
 };
@@ -37,3 +38,4 @@ ds_status_code ds6502_new(ds6502_cpu** cpu);
 void ds6502_free(ds6502_cpu** cpu);
 
 void ds6502_reset(ds6502_cpu* cpu);
+void ds6502_clock(ds6502_cpu* cpu, u32 cycles);
