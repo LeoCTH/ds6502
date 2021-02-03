@@ -3,9 +3,9 @@
 #include "types.h"
 
 // haha hidden impl :tiny_potato:
-typedef struct s_ds6502_memory_ ds6502_memory;
+typedef struct s_ds6502_memory ds6502_memory;
 
-typedef struct {
+typedef struct s_ds6502_memtype {
     void (*const free)(ds6502_memory*);
     u8   (*const read)(ds6502_memory*, u16);
     void (*const write)(ds6502_memory*, u16, u8);

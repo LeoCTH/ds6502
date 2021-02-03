@@ -1,11 +1,13 @@
 #pragma once
 
 #include <stdbool.h>
+#include "fwd/cpu.h"
 #include "types.h"
 #include "memory.h"
 #include "error_checking.h"
+#include "actions/action_queue.h"
 
-typedef struct {
+struct s_ds6502_cpu {
     u8 a, x, y, sp;
     u16 pc;
     union {
@@ -23,7 +25,8 @@ typedef struct {
     };
     ds6502_memory* memory;
     ds_status_code status_code;
-} ds6502_cpu;
+    ds_action_queue action_queue;
+};
 
 // new needs a status code because the cpu alloc might fail.
 // this is assuming that cpu != NULL

@@ -4,7 +4,7 @@
 
 // internal impl! :tiny_potato:
 // do *not* access this please thank
-struct s_ds6502_memory_ {
+struct s_ds6502_memory {
     void *_internal;
     ds6502_memtype *_type;
 };
